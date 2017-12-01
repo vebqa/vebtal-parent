@@ -12,7 +12,9 @@
 		<version.jersey>2.26</version.jersey>
 		<version.jetty>9.4.5.v20170502</version.jetty>
 		<version.slf4j>1.7.25</version.slf4j>
+		<version.log4j>2.10.0</version.log4j>
 		<version.jaxrs>2.1</version.jaxrs>
+		<version.junit>4.12</version.junit>
 	</properties>
 
 	<build>
