@@ -21,6 +21,7 @@
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
@@ -31,11 +32,12 @@
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.3.0.603</version>
+				<version>3.4.0.905</version>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.0.2</version>
 			</plugin>
 		</plugins>
 	</build>
