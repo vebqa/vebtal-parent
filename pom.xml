@@ -8,6 +8,12 @@
 
 	<packaging>pom</packaging>
 
+	<name>parent for vebtal system</name>
+	<description>parent information</description>
+	<inceptionYear>2018</inceptionYear>
+
+	<url>https://github.com/vebqa/vebtal-parent</url>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.slf4j>1.7.25</version.slf4j>
@@ -19,6 +25,25 @@
 		<name>VON ESSEN Bank GmbH</name>
 		<url>https://www.vonessenbank.de/bom</url>
 	</organization>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/vebqa/vebtal-parent.git</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Karsten Doerges</name>
+			<email>kdoerges@googlemail.com</email>
+		</developer>
+	</developers>
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
