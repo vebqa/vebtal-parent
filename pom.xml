@@ -2,20 +2,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.vebqa.vebtal</groupId>
+	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-parent</artifactId>
-	<version>1.0.0</version>
+	<version>0.9.0</version>
 
 	<packaging>pom</packaging>
 
 	<properties>
-		<version.vebcommons>2.1</version.vebcommons>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.jersey>2.26</version.jersey>
-		<version.jetty>9.4.7.v20170914</version.jetty>
 		<version.slf4j>1.7.25</version.slf4j>
 		<version.log4j>2.10.0</version.log4j>
-		<version.jaxrs>2.1</version.jaxrs>
 		<version.junit>4.12</version.junit>
 	</properties>
 
@@ -26,16 +22,52 @@
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.0.0-M2</version>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.0.5</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
+				<version>3.8.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>resources</directory>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>eu.somatik.serviceloader-maven-plugin</groupId>
 				<artifactId>serviceloader-maven-plugin</artifactId>
@@ -52,12 +84,46 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>			
-			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.4.0.905</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>resources</directory>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -93,6 +159,27 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- static code analysis -->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.5.0.1254</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jdeps-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
+			<!-- unit testing -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
+				<configuration>
+					<skipTests>${skip.unit.tests}</skipTests>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -193,18 +280,154 @@
 		</plugins>
 	</reporting>
 
-	<distributionManagement>
-		<repository>
-			<id>nexus-releases</id>
-			<url>https://nexus.vonessenkg.de/repository/maven-releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>https://nexus.vonessenkg.de/repository/maven-snapshots/</url>
-		</snapshotRepository>
-		<site>
-			<id>reporting</id>
-			<url>dav:https://nexus.vonessenkg.de/repository/</url>
-		</site>
-	</distributionManagement>
+	<profiles>
+			<profile>
+			<id>documentation</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-site-plugin</artifactId>
+						<version>3.7.1</version>
+					</plugin>
+				</plugins>
+			</build>
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>com.soebes.maven.plugins</groupId>
+						<artifactId>doxygen-maven-plugin</artifactId>
+						<version>1.1.0</version>
+						<configuration>
+							<workingDirectory>${basedir}</workingDirectory>
+							<executable>${doxygen.executable.path}</executable>
+							<haveDot>true</haveDot>
+							<dotCleanup>true</dotCleanup>
+							<extractAll>true</extractAll>
+							<umlLook>true</umlLook>
+							<callGraph>true</callGraph>
+							<callerGraph>true</callerGraph>
+							<dotPath>${dot.executable.path}</dotPath>
+							<quiet>false</quiet>
+							<filePatterns>*.java</filePatterns>
+							<configurationFile>./doxygen.config</configurationFile>
+							<input>${doxygenInput}</input>
+							<recursive>true</recursive>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-changes-plugin</artifactId>
+						<version>2.12.1</version>
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>changes-report</report>
+								</reports>
+							</reportSet>
+						</reportSets>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>3.1.1</version>
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>analyze-report</report>
+								</reports>
+							</reportSet>
+						</reportSets>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>3.10.0</version>
+						<configuration>
+							<skipEmptyReport>false</skipEmptyReport>
+							<includeTests>true</includeTests>
+						</configuration>
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>cpd</report>
+									<report>pmd</report>
+								</reports>
+							</reportSet>
+						</reportSets>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-project-info-reports-plugin</artifactId>
+						<version>3.0.0</version>
+						<configuration>
+							<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+						</configuration>
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>index</report>
+									<report>summary</report>
+									<report>modules</report>
+									<report>license</report>
+									<report>project-team</report>
+									<report>scm</report>
+									<report>issue-tracking</report>
+									<report>dependency-management</report>
+									<report>dependencies</report>
+									<report>dependency-convergence</report>
+									<report>plugin-management</report>
+									<report>plugins</report>
+								</reports>
+							</reportSet>
+						</reportSets>
+					</plugin>
+				</plugins>
+			</reporting>
+		</profile>
+	
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.8</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+				</snapshotRepository>
+				<repository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+				</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+	</profiles>
+
 </project>
