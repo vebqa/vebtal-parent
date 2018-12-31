@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-parent</artifactId>
-	<version>0.9.0</version>
+	<version>0.9.1</version>
 
 	<packaging>pom</packaging>
 
@@ -148,7 +148,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -250,6 +249,18 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>2.9</version>
 				<configuration>
@@ -306,7 +317,7 @@
 	</reporting>
 
 	<profiles>
-			<profile>
+		<profile>
 			<id>documentation</id>
 			<build>
 				<plugins>
@@ -393,15 +404,17 @@
 									<report>index</report>
 									<report>summary</report>
 									<report>modules</report>
-									<report>license</report>
-									<report>project-team</report>
+									<report>licenses</report>
+									<report>team</report>
 									<report>scm</report>
-									<report>issue-tracking</report>
+									<report>issue-management</report>
 									<report>dependency-management</report>
+									<report>dependency-info</report>
 									<report>dependencies</report>
 									<report>dependency-convergence</report>
 									<report>plugin-management</report>
 									<report>plugins</report>
+									<report>distribution-management</report>
 								</reports>
 							</reportSet>
 						</reportSets>
@@ -409,7 +422,7 @@
 				</plugins>
 			</reporting>
 		</profile>
-	
+
 		<profile>
 			<id>release</id>
 			<build>
