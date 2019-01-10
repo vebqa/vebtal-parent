@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-parent</artifactId>
-	<version>0.9.4</version>
+	<version>0.9.5</version>
 
 	<packaging>pom</packaging>
 
@@ -72,7 +72,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -85,22 +84,9 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<release>11</release>
+					<release>8</release>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<resources>
-						<resource>
-							<directory>resources</directory>
-						</resource>
-					</resources>
-				</configuration>
-			</plugin>
-
 			<plugin>
 				<groupId>eu.somatik.serviceloader-maven-plugin</groupId>
 				<artifactId>serviceloader-maven-plugin</artifactId>
@@ -128,6 +114,19 @@
 							<directory>resources</directory>
 						</resource>
 					</resources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Automatic-Module-Name>com.github.vebqa.${modulename}</Automatic-Module-Name>
+							 <Built-By>${user.name}</Built-By>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
