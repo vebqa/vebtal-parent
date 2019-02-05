@@ -86,6 +86,9 @@
 				</dependencies>
 				<configuration>
 					<release>8</release>
+					<!-- additional for sonar scanner, not working with release conf yet -->
+					<source>1.8</source>
+          			<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -219,7 +222,7 @@
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.6.0.1398</version>
+				<version>3.5.0.1254</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
