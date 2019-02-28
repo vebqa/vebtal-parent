@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-parent</artifactId>
-	<version>0.9.8</version>
+	<version>0.9.9</version>
 
 	<packaging>pom</packaging>
 
@@ -18,7 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.jersey>2.28</version.jersey>
 		<version.jetty>9.4.12.v20180830</version.jetty>
-		<version.slf4j>1.7.25</version.slf4j>
+		<version.slf4j>1.7.26</version.slf4j>
 		<version.log4j>2.11.2</version.log4j>
 		<version.junit>4.12</version.junit>
 		<version.assertj>3.12.0</version.assertj>
@@ -88,7 +88,7 @@
 					<release>8</release>
 					<!-- additional for sonar scanner, not working with release conf yet -->
 					<source>8</source>
-          			<target>8</target>
+					<target>8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -128,7 +128,7 @@
 					<archive>
 						<manifestEntries>
 							<Automatic-Module-Name>com.github.vebqa.${modulename}</Automatic-Module-Name>
-							 <Built-By>${user.name}</Built-By>
+							<Built-By>${user.name}</Built-By>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -174,7 +174,7 @@
 					<dependency>
 						<groupId>org.apache.maven.wagon</groupId>
 						<artifactId>wagon-webdav-jackrabbit</artifactId>
-						<version>3.3.1</version>
+						<version>3.3.2</version>
 					</dependency>
 					<dependency>
 						<groupId>org.ow2.asm</groupId>
@@ -222,12 +222,7 @@
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.5.0.1254</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jdeps-plugin</artifactId>
-				<version>3.1.1</version>
+				<version>3.6.0.1398</version>
 			</plugin>
 			<!-- unit testing -->
 			<plugin>
@@ -312,6 +307,7 @@
 						<reports>
 							<report>dependency-updates-report</report>
 							<report>plugin-updates-report</report>
+							<report>property-updates-report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -324,12 +320,34 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>1.16</version>
+				<version>1.18</version>
 			</plugin>
 		</plugins>
 	</reporting>
 
 	<profiles>
+		<profile>
+			<id>jdeps</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jdeps-plugin</artifactId>
+						<version>3.1.1</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>jdkinternals</goal> <!-- verify main classes -->
+									<goal>test-jdkinternals</goal> <!-- verify test classes -->
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+
 		<profile>
 			<id>documentation</id>
 			<build>
