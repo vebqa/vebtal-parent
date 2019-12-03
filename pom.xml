@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-parent</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 
 	<packaging>pom</packaging>
 
-	<name>parent for vebtal system</name>
-	<description>parent information</description>
+	<name>parent for opental system</name>
+	<description>common dependencies</description>
 	<inceptionYear>2018</inceptionYear>
 
 	<url>https://github.com/vebqa/vebtal-parent</url>
@@ -21,13 +21,13 @@
 		<version.slf4j>1.7.28</version.slf4j>
 		<version.log4j>2.12.0</version.log4j>
 		<version.junit>4.12</version.junit>
-		<version.hamcrest>2.1</version.hamcrest>
-		<version.assertj>3.13.2</version.assertj>
+		<version.hamcrest>2.2</version.hamcrest>
+		<version.assertj>3.14.0</version.assertj>
 	</properties>
 
 	<organization>
-		<name>Consors Finanz</name>
-		<url>https://www.consorsfinanz.de</url>
+		<name>openTAL</name>
+		<url>https://www.opental.org</url>
 	</organization>
 
 	<licenses>
