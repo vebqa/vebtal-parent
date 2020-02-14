@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<name>opental-parent</name>
-	<description>common dependencies for opental system</description>
+	<description>openTAL - provides keywords for action, verification and observation on an abstract level to a SUT </description>
 	<inceptionYear>2018</inceptionYear>
 
 	<url>https://github.com/vebqa/vebtal-parent</url>
