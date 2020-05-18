@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-parent</artifactId>
-	<version>1.0.5</version>
+	<version>1.0.6-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
@@ -86,7 +86,6 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<release>8</release>
 					<!-- additional for sonar scanner, not working with release conf yet -->
 					<source>8</source>
 					<target>8</target>
