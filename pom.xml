@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-parent</artifactId>
-	<version>1.0.6</version>
+	<version>1.0.6-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
@@ -17,10 +17,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.jersey>2.31</version.jersey>
-		<version.jetty>9.4.26.v20200117</version.jetty>
+		<version.jetty>9.4.27.v20200227</version.jetty>
 		<version.slf4j>1.7.30</version.slf4j>
 		<version.log4j>2.13.3</version.log4j>
-		<version.junit>4.12</version.junit>
+		<version.junit>4.13</version.junit>
 		<version.hamcrest>2.2</version.hamcrest>
 		<version.assertj>3.16.1</version.assertj>
 	</properties>
@@ -52,7 +52,6 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
-
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -60,7 +59,6 @@
 					<artifactId>maven-release-plugin</artifactId>
 					<version>3.0.0-M1</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
